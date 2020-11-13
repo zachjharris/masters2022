@@ -5,14 +5,16 @@
       color="white"
     >
       <v-spacer />
-      <template v-for="(leader) in leaders">
-        <div :key="leader.id" class="px-3 mx-3">
-            <div>
-              <div class="text-center font-weight-bold">{{ leader.name }}</div>
-              <div class="text-center">Today: {{ leader.today }}</div>
-            </div>
-        </div>
-      </template>
+      <v-tabs>
+        <template v-for="(leader) in leaders">
+
+          <v-tab :key="leader.id" class="px-3 mx-3">
+              <div class="text-center font-weight-bold">
+                {{ leader.name }}: {{ leader.today }}
+              </div>
+          </v-tab>
+        </template>
+      </v-tabs>
     </v-app-bar>
 
     <v-main>
