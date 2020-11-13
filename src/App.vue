@@ -4,8 +4,7 @@
       app
       color="white"
     >
-      <v-spacer />
-      <v-tabs>
+      <v-tabs show-arrows>
         <template v-for="(leader) in leaders">
 
           <v-tab :key="leader.id" class="px-3 mx-3">

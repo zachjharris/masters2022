@@ -8,7 +8,7 @@
             </v-btn>
         </v-card-title>
         <v-card-text>
-            <v-tabs>
+            <v-tabs show-arrows>
                 <v-tab>Round 1</v-tab>
                 <v-tab>Round 2</v-tab>
                 <v-tab>Round 3</v-tab>
