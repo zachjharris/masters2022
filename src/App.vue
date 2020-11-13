@@ -33,7 +33,8 @@ export default {
   },
 
   data: () => ({
-    //
+    showPlayer: false,
+    player: {}
   }),
   computed: {
     scores() {

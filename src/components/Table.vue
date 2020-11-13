@@ -1,4 +1,5 @@
 <template>
+<v-card>
     <v-data-table :items="users" :headers="headers" 
         hide-default-footer 
         disable-pagination
@@ -11,7 +12,7 @@
                     <tr :key="`${user.name}-${index}`" v-if="user.picks[0] != null">
                         <td>{{ user.name }}</td>
                         <template v-for="pick in user.picks">
-                            <td :key="`${user.name}-${index}-${pick.id}`">
+                            <td :key="`${user.name}-${index}-${pick.id}`" @click="viewPlayer(pick)">
                                 <v-tooltip top>
                                     <template v-slot:activator="{ on }">
                                         <span v-on="on">
@@ -33,12 +34,22 @@
             </tbody>
         </template>
     </v-data-table>
+    <v-dialog v-if="showPlayer" v-model="showPlayer" max-width="600">
+        <player :player="player" />
+    </v-dialog>
+</v-card>
 </template>
 <script>
+import Player from './Player';
 export default {
     props: ['users'],
+    components: {
+        Player
+    },
     data() {
         return {
+            showPlayer: false,
+            player: {},
             search: '',
             headers: [
                 {text: 'Name', value: 'name'},
@@ -51,6 +62,12 @@ export default {
                 {text: 'Today', value: 'today', align: 'center'},
                 {text: 'Strokes', value: 'totalStrokes', align: 'center'},
             ]
+        }
+    },
+    methods: {
+        viewPlayer(player) {
+            this.player = player;
+            this.showPlayer = true;
         }
     }
 }
