@@ -1,12 +1,12 @@
 import Vuex from 'vuex';
-//import axios from 'axios';
+import axios from 'axios';
 import Vue from 'vue';
 Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         users: [
             {
-              "Name": "Dario Petronzio",
+              "name": "Dario Petronzio",
               "golfers": [
                 28237,
                 47959,
@@ -17,18 +17,18 @@ const store = new Vuex.Store({
               ]
             },
             {
-              "Name": "Will Gandert",
+              "name": "Will Gandert",
               "golfers": [
                 47959,
                 8793,
                 30925,
                 28237,
-                28237,
+                32102,
                 30911
               ]
             },
             {
-              "Name": "Zach Harris",
+              "name": "Zach Harris",
               "golfers": [
                 30925,
                 46970,
@@ -39,7 +39,7 @@ const store = new Vuex.Store({
               ]
             },
             {
-              "Name": "Michael Hazelden",
+              "name": "Michael Hazelden",
               "golfers": [
                 30925,
                 28237,
@@ -50,7 +50,7 @@ const store = new Vuex.Store({
               ]
             },
             {
-              "Name": "Dan Hensler",
+              "name": "Dan Hensler",
               "golfers": [
                 33448,
                 36689,
@@ -61,7 +61,7 @@ const store = new Vuex.Store({
               ]
             },
             {
-              "Name": "Parker smith",
+              "name": "Parker smith",
               "golfers": [
                 46970,
                 33448,
@@ -72,7 +72,7 @@ const store = new Vuex.Store({
               ]
             },
             {
-              "Name": "Mike Briach",
+              "name": "Mike Briach",
               "golfers": [
                 47959,
                 30925,
@@ -83,7 +83,7 @@ const store = new Vuex.Store({
               ]
             },
             {
-              "Name": "Nik Sekoulopoulo",
+              "name": "Nik Sekoulopoulo",
               "golfers": [
                 47959,
                 33448,
@@ -94,7 +94,7 @@ const store = new Vuex.Store({
               ]
             },
             {
-              "Name": "Alex Harris",
+              "name": "Alex Harris",
               "golfers": [
                 47959,
                 36689,
@@ -105,7 +105,7 @@ const store = new Vuex.Store({
               ]
             },
             {
-              "Name": "Zach Domer",
+              "name": "Zach Domer",
               "golfers": [
                 30925,
                 47959,
@@ -116,7 +116,7 @@ const store = new Vuex.Store({
               ]
             },
             {
-              "Name": "John Breig",
+              "name": "John Breig",
               "golfers": [
                 47959,
                 30925,
@@ -127,29 +127,29 @@ const store = new Vuex.Store({
               ]
             },
             {
-              "Name": "Eric Spracklen",
+              "name": "Eric Spracklen",
               "golfers": [
                 29725,
                 8793,
                 1810,
                 29221,
                 36689,
-                28237
+                32102
               ]
             },
             {
-              "Name": "Dylan Dancer",
+              "name": "Dylan Dancer",
               "golfers": [
                 47959,
                 46970,
                 36689,
                 29725,
                 28237,
-                28237
+                32102
               ]
             },
             {
-              "Name": "Eric Spracklen",
+              "name": "Eric Spracklen",
               "golfers": [
                 48081,
                 32839,
@@ -170,14 +170,33 @@ const store = new Vuex.Store({
                 28237
               ]
             }
-          ],
+        ],
+        scores: [],
+        yardages: [],
+        pars: []
     },
     mutations: {
-
+        setScores(state, scores) {
+            state.scores = scores;
+        },
+        setPars(state, pars) {
+            state.pars = pars;
+        },
+        setYardages(state, yardages) {
+            state.yardages = yardages;
+        }
     },
     actions: {
-        async getStats() {
-
+        async getScores(context) {
+            try {
+                const { data } = await axios.get(`https://www.masters.com/en_US/scores/feeds/scores.json`);
+                context.commit('setScores', data.data.player);
+                context.commit('setPars', data.data.pars);
+                context.commit('setYardages', data.data.yardages);
+            }
+            catch(err) {
+                console.log('unable to retrieve scores');
+            }
         }
     }
 });
