@@ -85,7 +85,7 @@ export default {
             player: {},
             search: '',
             headers: [
-                {text: 'Name', value: 'name', width:'200'},
+                {text: 'Name', value: 'name', width:'150'},
                 {text: 'Total', value: 'topar', align: 'center'},
                 {text: 'Today', value: 'today', align: 'center'},
                 {text: 'Golfer 1', value: 'picks[0].name', width: '170'},

@@ -10,9 +10,9 @@
             <template v-slot:body="{ items }">
                 <tbody>
                     <template v-for="(pick) in items"> 
-                        <tr v-if="pick.display_name2 != null" :key="`${pick.id}`">
+                        <tr v-if="pick.name != null" :key="`${pick.id}`">
                             <td @click="viewPlayer(pick)">
-                                <span :class="{'text-decoration-line-through': pick.index> 50 }">{{ pick.display_name2 }}</span>
+                                <span :class="{'text-decoration-line-through': pick.index> 50 }">{{ pick.name }}</span>
                             </td>
                             <td class="text-center">{{ pick.topar }}</td>
                             <td class="text-center">{{ pick.today == '' ? pick.teetime : pick.today }}</td>
@@ -45,7 +45,7 @@ export default {
             player: {},
             search: '',
             headers: [
-                {text: 'Name', value: 'display_name2', width:'200'},
+                {text: 'Name', value: 'name', width:'175'},
                 {text: 'Total', value: 'topar', align: 'center'},
                 {text: 'Today', value: 'today', align: 'center', width: '80'},
                 {text: 'Round 1', value: 'round1Total', align: 'center'},

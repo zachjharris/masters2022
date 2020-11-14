@@ -18,16 +18,19 @@
 
     <v-main>
       <v-container>
-        <v-tabs>
+        <v-tabs v-model="tab">
           <v-tab>Picks</v-tab>
           <v-tab>Players</v-tab>
-          <v-tab-item touchless>
+        </v-tabs>
+        
+        <v-tabs-items touchless v-model="tab">
+          <v-tab-item>
             <player-table :users="users" :pars="pars" />
           </v-tab-item>
-          <v-tab-item touchless>
+          <v-tab-item>
             <pick-table :picks="picks" :pars="pars" v-if="picks.length > 0 && scores.length > 0" />
           </v-tab-item>
-        </v-tabs>
+        </v-tabs-items>
       </v-container>
     </v-main>
   </v-app>
@@ -46,6 +49,7 @@ export default {
 
   data: () => ({
     showPlayer: false,
+    tab: 0,
     player: {}
   }),
   computed: {
