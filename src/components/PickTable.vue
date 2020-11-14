@@ -47,7 +47,7 @@ export default {
             headers: [
                 {text: 'Name', value: 'display_name2', width:'200'},
                 {text: 'Total', value: 'topar', align: 'center'},
-                {text: 'Today', value: 'today', align: 'center'},
+                {text: 'Today', value: 'today', align: 'center', width: '80'},
                 {text: 'Round 1', value: 'round1Total', align: 'center'},
                 {text: 'Round 2', value: 'round2Total', align: 'center'},
                 {text: 'Round 3', value: 'round3Total', align: 'center'},

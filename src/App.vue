@@ -21,10 +21,10 @@
         <v-tabs>
           <v-tab>Picks</v-tab>
           <v-tab>Players</v-tab>
-          <v-tab-item>
+          <v-tab-item touchless>
             <player-table :users="users" :pars="pars" />
           </v-tab-item>
-          <v-tab-item>
+          <v-tab-item touchless>
             <pick-table :picks="picks" :pars="pars" v-if="picks.length > 0 && scores.length > 0" />
           </v-tab-item>
         </v-tabs>
