@@ -67,7 +67,7 @@
         </template>
     </v-data-iterator>
     <v-dialog v-if="showPlayer" v-model="showPlayer" max-width="600">
-        <player :pars="pars" :player="player" />
+        <player :pars="pars" :player="player" @cancel="showPlayer = false" />
     </v-dialog>
 </v-container>
 </template>

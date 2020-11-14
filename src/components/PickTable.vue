@@ -27,7 +27,7 @@
         </v-data-table>
     </v-card>
     <v-dialog v-if="showPlayer" v-model="showPlayer" max-width="600">
-        <player :pars="pars" :player="player" />
+        <player :pars="pars" :player="player" @cancel="showPlayer = false" />
     </v-dialog>
 </v-container>
 </template>
@@ -47,7 +47,7 @@ export default {
             headers: [
                 {text: 'Name', value: 'name', width:'175'},
                 {text: 'Total', value: 'topar', align: 'center'},
-                {text: 'Today', value: 'today', align: 'center', width: '80'},
+                {text: 'Today', value: 'today', align: 'center', width: '100'},
                 {text: 'Round 1', value: 'round1Total', align: 'center'},
                 {text: 'Round 2', value: 'round2Total', align: 'center'},
                 {text: 'Round 3', value: 'round3Total', align: 'center'},
