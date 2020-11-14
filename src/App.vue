@@ -9,7 +9,7 @@
 
           <v-tab :key="leader.id" class="px-3 mx-3">
               <div class="text-center font-weight-bold">
-                {{ leader.name }}: {{ leader.today }}
+                {{ leader.display_name2 }}: {{ leader.topar }}
               </div>
           </v-tab>
         </template>
@@ -40,8 +40,9 @@ export default {
   computed: {
     scores() {
       const scores = this.$store.state.scores;
-      return scores.map((score) => {
+      return scores.map((score, index) => {
         score.name = score.first_name + ' ' + score.last_name;
+        score.index = index;
         return score;
       });
     },
@@ -78,6 +79,20 @@ export default {
             return accumulator;
           }
         }, 0);
+        user.topar = user.picks.reduce((accumulator, pick) => {
+          if (pick == null) {
+            return accumulator;
+          }
+          if (pick.topar.indexOf('+') > -1) {
+            return accumulator + parseInt(pick.topar.replace('+', ''));
+          }
+          if (pick.topar.indexOf('-') > -1) {
+            return accumulator - parseInt(pick.topar.replace('-', ''));
+          }
+          if (pick.topar == 'E') {
+            return accumulator;
+          }
+        }, 0);
         return user;
       });
     },
@@ -90,7 +105,15 @@ export default {
   },
   mounted() {
     console.log(this);
-    this.$store.dispatch('getScores');
+    this.retrieveScores();
+    setInterval(() => {
+      this.retrieveScores();
+    }, 60 * 1000);
+  },
+  methods: {
+    retrieveScores() {
+      this.$store.dispatch('getScores');
+    }
   }
 };
 </script>
