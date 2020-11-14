@@ -20,12 +20,14 @@
                             <thead>
                                 <tr>
                                     <th>Hole</th>
+                                    <th>Par</th>
                                     <th>Score</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(score, holeIndex) in round.scores" :key="`hole-${holeIndex+1}`">
                                     <td>{{ holeIndex + 1 }}</td>
+                                    <td>{{ roundPars[index][holeIndex] }}</td>
                                     <td>{{ score }}</td>
                                 </tr>
                             </tbody>
@@ -38,10 +40,13 @@
 </template>
 <script>
 export default {
-    props: ['player'],
+    props: ['player', 'pars'],
     computed: {
         rounds() {
             return [this.player.round1, this.player.round2, this.player.round3, this.player.round4];
+        },
+        roundPars() {
+            return [this.pars.round1, this.pars.round2, this.pars.round3, this.pars.round4];
         }
     }
 }

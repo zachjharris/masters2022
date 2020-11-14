@@ -4,7 +4,7 @@
       app
       color="white"
     >
-      <v-tabs show-arrows>
+      <v-tabs show-arrows hide-slider optional>
         <template v-for="(leader) in leaders">
 
           <v-tab :key="leader.id" class="px-3 mx-3">
@@ -18,7 +18,16 @@
 
     <v-main>
       <v-container>
-        <player-table :users="users" />
+        <v-tabs>
+          <v-tab>Picks</v-tab>
+          <v-tab>Players</v-tab>
+          <v-tab-item>
+            <player-table :users="users" :pars="pars" />
+          </v-tab-item>
+          <v-tab-item>
+            <pick-table :picks="picks" :pars="pars" v-if="picks.length > 0 && scores.length > 0" />
+          </v-tab-item>
+        </v-tabs>
       </v-container>
     </v-main>
   </v-app>
@@ -26,11 +35,13 @@
 
 <script>
 import PlayerTable from './components/Table';
+import PickTable from './components/PickTable';
 import _ from 'lodash';
 export default {
   name: 'App',
   components: {
-    PlayerTable
+    PlayerTable,
+    PickTable
   },
 
   data: () => ({
@@ -38,11 +49,52 @@ export default {
     player: {}
   }),
   computed: {
+    pars() {
+      const pars = this.$store.state.pars;
+      return pars;
+    },
     scores() {
       const scores = this.$store.state.scores;
+      const pars = this.pars;
       return scores.map((score, index) => {
         score.name = score.first_name + ' ' + score.last_name;
         score.index = index;
+        score.round1Total = score.round1.scores.reduce((accumulator, score, index) => {
+          const holePar = pars.round1[index];
+          if (holePar != null) {
+            if (score != null) {
+              return accumulator + (score - holePar);
+            }
+          }
+          return accumulator;
+        }, 0);
+        score.round2Total = score.round2.scores.reduce((accumulator, score, index) => {
+          const holePar = pars.round2[index];
+          if (holePar != null) {
+            if (score != null) {
+              return accumulator + (score - holePar);
+            }
+          }
+          return accumulator;
+        }, 0);
+        score.round3Total = score.round3.scores.reduce((accumulator, score, index) => {
+          const holePar = pars.round3[index];
+          if (holePar != null) {
+            if (score != null) {
+              return accumulator + (score - holePar);
+            }
+          }
+          return accumulator;
+        }, 0);
+        score.round4Total = score.round4.scores.reduce((accumulator, score, index) => {
+          const holePar = pars.round4[index];
+          if (holePar != null) {
+            if (score != null) {
+              return accumulator + (score - holePar);
+            }
+          }
+          return accumulator;
+        }, 0);
         return score;
       });
     },
@@ -75,7 +127,7 @@ export default {
           if (pick.today.indexOf('-') > -1) {
             return accumulator - parseInt(pick.today.replace('-', ''));
           }
-          if (pick.today == 'E') {
+          if (pick.today == 'E' || pick.today == '') {
             return accumulator;
           }
         }, 0);
@@ -101,6 +153,14 @@ export default {
       return scores.filter((score) => {
         return score.pos == 'T1' || score.pos == '1';
       });
+    },
+    picks() {
+      const users = this.users;
+      const picks = [];
+      users.forEach((user) => {
+        picks.push(...user.picks);
+      });
+      return _.orderBy(_.uniqBy(picks, 'id'), ['index'], ['asc']);
     }
   },
   mounted() {

@@ -22,7 +22,7 @@
                         <tr :key="`${user.name}-${index}`" v-if="user.picks[0] != null">
                             <td>{{ user.name }}</td>
                             <td class="text-center">{{ user.topar }}</td>
-                            <td class="text-center">{{ user.today }}</td>
+                            <td class="text-center">{{ user.today > 0 ? '+' + user.today : user.today == '0' ? 'E' : user.today }}</td>
                             <template v-for="pick in user.picks">
                                 <td :key="`${user.name}-${index}-${pick.id}`" @click="viewPlayer(pick)">
                                     <v-tooltip top>
@@ -67,14 +67,14 @@
         </template>
     </v-data-iterator>
     <v-dialog v-if="showPlayer" v-model="showPlayer" max-width="600">
-        <player :player="player" />
+        <player :pars="pars" :player="player" />
     </v-dialog>
 </v-container>
 </template>
 <script>
 import Player from './Player';
 export default {
-    props: ['users'],
+    props: ['users', 'pars'],
     components: {
         Player
     },
