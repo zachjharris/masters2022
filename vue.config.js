@@ -4,6 +4,6 @@ const config = {
   ]
 }
 if (process.env.NODE_ENV == 'production') {
-  config.publicPath = "https://zachjharris.github.io/masters/dist/";
+  config.publicPath = "https://zachjharris.github.io/masters/masters2021/";
 }
 module.exports = config;
