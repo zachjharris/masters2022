@@ -9,6 +9,7 @@
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
+    "@videojs/http-streaming": "^2.7.0",
     "@vue/cli-plugin-pwa": "^4.5.12",
     "axios": "^0.21.0",
     "core-js": "^3.6.5",

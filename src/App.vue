@@ -24,47 +24,69 @@
         <v-icon>{{ isDarkMode ? 'mdi-brightness-4' : 'mdi-brightness-6' }}</v-icon>
       </v-btn>
       -->
-      <!--
-      <v-btn @click="showVideo" icon>
-        <v-icon>mdi-video</v-icon>
-      </v-btn>
-      -->
+      <v-tooltip left>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on" @click="playing = !playing" icon>
+            <v-icon>{{ playing ? 'mdi-video' : 'mdi-video-off' }}</v-icon>
+          </v-btn>
+        </template>
+        <span>Toggle Video</span>
+      </v-tooltip>
+      
     </v-app-bar>
 
     <v-main>
       <v-container>
-        <v-tabs v-model="tab">
-          <v-tab>Picks</v-tab>
-          <v-tab>Players</v-tab>
-          <!--<v-tab>Leaders</v-tab>-->
-        </v-tabs>
-        
-        <v-tabs-items touchless v-model="tab">
-          <v-tab-item>
-            <player-table :users="users" :pars="pars" />
-          </v-tab-item>
-          <v-tab-item>
-            <pick-table :picks="picks" :pars="pars" v-if="picks.length > 0 && scores.length > 0" />
-          </v-tab-item>
-          <!--
-          <v-tab-item>
-            <v-card>
-              <v-card-text>
-                <v-list>
-                  <v-list-item v-for="leader in leaders" :key="`leader-${leader.id}`">
-                    <v-list-item-title>{{ leader.display_name2 }}</v-list-item-title>
-                  </v-list-item>
-                </v-list>
-              </v-card-text>
-            </v-card>
-          </v-tab-item>
-          -->
-        </v-tabs-items>
+        <v-row>
+          <v-col :cols="playing ? 8 : 12">
+          <v-tabs v-model="tab">
+            <v-tab>Picks</v-tab>
+            <v-tab>Players</v-tab>
+            <!--<v-tab>Leaders</v-tab>-->
+          </v-tabs>
+          
+          <v-tabs-items touchless v-model="tab">
+            <v-tab-item>
+              <player-table :users="users" :pars="pars" />
+            </v-tab-item>
+            <v-tab-item>
+              <pick-table :picks="picks" :pars="pars" v-if="picks.length > 0 && scores.length > 0" />
+            </v-tab-item>
+            <!--
+            <v-tab-item>
+              <v-card>
+                <v-card-text>
+                  <v-list>
+                    <v-list-item v-for="leader in leaders" :key="`leader-${leader.id}`">
+                      <v-list-item-title>{{ leader.display_name2 }}</v-list-item-title>
+                    </v-list-item>
+                  </v-list>
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+            -->
+          </v-tabs-items>
+          </v-col>
+          <v-col cols="4" v-if="playing">
+            <div class="video-container">
+              <div class="video-wrapper">
+                <video id="video" autoplay muted controls="true" style="max-width:100%;width:100%;"></video>
+              </div>
+            </div>
+            <v-row>
+              <v-tabs v-model="selectedVideo" grow>
+                <v-tab value="Featured">Featured</v-tab>
+                <v-tab value="Amen Corner">Amen Corner</v-tab>
+                <v-tab value="Holes 4, 5 & 6">Holes 4, 5 & 6</v-tab>
+                <v-tab value="Holes 15 & 16">Holes 15 & 16</v-tab>
+              </v-tabs>
+            </v-row>
+          </v-col>
+
+        </v-row>
       </v-container>
     </v-main>
-    <!--
-    <video id="video" v-if="playing" style="position:fixed;bottom:0;right:0;height:300px;width:300px;"></video>
-    -->
+    
   </v-app>
 </template>
 
@@ -88,6 +110,21 @@ export default {
     isDarkMode: false,
     video: null,
     playing: false,
+    muted: true,
+    isFullScreen: false,
+    videos: {
+      'Featured': 'https://ibm1-live-hls.secure.footprint.net/egress/chandler/ibmmasters/live1/fg/master_600.m3u8',
+      'Amen Corner': `https://ibm1-live-hls.secure.footprint.net/egress/chandler/ibmmasters/live1/ac/master_5000.m3u8`,
+      'Holes 4, 5 & 6': `https://ibmlive2021.akamaized.net/hls/live/2013854/456/master_600.m3u8`,
+      'Holes 15 & 16': `https://ibm1-live-hls.secure.footprint.net/egress/chandler/ibmmasters/live1/1516/master_5000.m3u8`
+    },
+    videoTabs: [
+      'Featured',
+      'Amen Corner',
+      'Holes 4, 5 & 6',
+      'Holes 15 & 16'
+    ],
+    selectedVideo: 0
   }),
   computed: {
     pars() {
@@ -230,7 +267,8 @@ export default {
     setInterval(() => {
       this.retrieveScores();
     }, 60 * 1000);
-    //this.showVideo();
+    this.showVideo();
+    this.selectedVideo = 0;
   },
   beforeDestroy() {
     this.playing = false;
@@ -244,20 +282,82 @@ export default {
       this.$vuetify.theme.dark = this.isDarkMode;
     },
     showVideo() {
-      this.playing = true;
       this.$nextTick(() => {
         const video = document.querySelector('#video');
-        const videoSrc = `https://ibm1-live-hls.secure.footprint.net/egress/chandler/ibmmasters/live1/fg/master_600.m3u8`;
+        const src = this.videos[this.videoTabs[this.selectedVideo]];
+        console.log(src);
         if (Hls.isSupported()) {
           const hls = new Hls();
-          hls.loadSource(videoSrc);
+          hls.detachMedia();
+          hls.loadSource(src);
           hls.attachMedia(video);
         }
         else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          video.src = videoSrc;
+          console.log(`don't need library`);
+          video.src = src;
         }
       });
+    },
+  },
+  watch: {
+    selectedVideo(newVal, oldVal) {
+      console.log('newVal', newVal, 'oldVal', oldVal);
+      console.log(this.videoTabs[newVal]);
+      if (newVal !== oldVal) {
+        this.showVideo(true);
+      }
+    },
+    playing(newVal) {
+      if (newVal) {
+        this.showVideo();
+      }
     }
   }
 };
 </script>
+<style lang="scss">
+.video-container {
+  height:320px;
+  /*
+  position:relative;
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  height:200px;
+  width:300px;
+  */
+  &:hover {
+    .video-wrapper {
+      button {
+        display:block;
+      }
+    }
+  }
+  .video-wrapper {
+    position:relative;
+    button {
+      background: rgba(0,0,0,.5)!important;
+      color: #ffffff!important;
+      z-index: 1;
+      display:none;
+    }
+    button.toggle-sound {
+      position:absolute;
+      right:5px;
+      top:5px;
+
+    }
+    button.toggle-fullscreen {
+      position:absolute;
+      bottom:5px;
+      right:0;
+    }
+    #video {
+      /*
+      */
+      position:absolute;
+      top:0;left:0;right:0;bottom:0;
+    }
+  }
+}
+</style>
