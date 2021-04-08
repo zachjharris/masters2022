@@ -25,11 +25,11 @@
                             <td class="text-center">{{ user.today > 0 ? '+' + user.today : user.today == '0' ? 'E' : user.today }}</td>
                             <template v-for="pick in user.picks">
                                 <td :key="`${user.name}-${index}-${pick.id}`" @click="viewPlayer(pick)">
-                                    <v-tooltip top>
+                                    <v-tooltip top :disabled="pick.pos == '' || pick.today == '' || pick.thru == ''">
                                         <template v-slot:activator="{ on }">
-                                            <span v-on="on" :class="{'text-decoration-line-through': pick.index> 50 }">
+                                            <span v-on="on" :class="{'text-decoration-line-through': pick.index> 500 }">
                                                 {{ pick.first_name + ' ' + pick.last_name }}<br />
-                                                <v-chip x-small>{{ pick.pos }}: {{ pick.topar }}</v-chip>
+                                                <v-chip x-small v-if="pick.pos != '' && pick.topar != ''">{{ pick.pos }}: {{ pick.topar }}</v-chip>
                                             </span>
                                         </template>
                                         <div>

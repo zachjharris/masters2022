@@ -2,7 +2,6 @@
   <v-app>
     <v-app-bar
       app
-      color="white"
     >
       <v-tabs show-arrows hide-slider optional>
         <template v-for="(leader) in leaders">
@@ -14,6 +13,10 @@
           </v-tab>
         </template>
       </v-tabs>
+      <v-spacer />
+      <v-btn @click="toggleMode" icon>
+        <v-icon>{{ isDarkMode ? 'mdi-brightness-4' : 'mdi-brightness-6' }}</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-main>
@@ -50,7 +53,8 @@ export default {
   data: () => ({
     showPlayer: false,
     tab: 0,
-    player: {}
+    player: {},
+    isDarkMode: false,
   }),
   computed: {
     pars() {
@@ -115,12 +119,17 @@ export default {
           });
         });
         user.bestPosition = '';
+        /*
         user.totalStrokes = user.picks.reduce((accumulator, pick) => {
           if (pick == null) {
             return accumulator;
           }
           return accumulator + parseInt(pick.total);
         }, 0);
+        */
+        user.totalStrokes = 0;
+        user.today = 0;
+        /*
         user.today = user.picks.reduce((accumulator, pick) => {
           if (pick == null) {
             return accumulator;
@@ -135,6 +144,9 @@ export default {
             return accumulator;
           }
         }, 0);
+        */
+        user.topar = 0;
+        /*
         user.topar = user.picks.reduce((accumulator, pick) => {
           if (pick == null) {
             return accumulator;
@@ -149,6 +161,7 @@ export default {
             return accumulator;
           }
         }, 0);
+        */
         return user;
       });
     },
@@ -177,6 +190,10 @@ export default {
   methods: {
     retrieveScores() {
       this.$store.dispatch('getScores');
+    },
+    toggleMode() {
+      this.isDarkMode = !this.isDarkMode;
+      this.$vuetify.theme.dark = this.isDarkMode;
     }
   }
 };
