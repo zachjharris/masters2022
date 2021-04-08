@@ -4,12 +4,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://zachjharris.github.io/masters2021/css/chunk-vendors.b48ffef7.css"
   },
   {
-    "revision": "7fac07694d3838d1d8ed5790ac417a89",
+    "revision": "fccd95ae22ecc3d784dadbb69567c0c8",
     "url": "https://zachjharris.github.io/masters2021/index.html"
   },
   {
-    "revision": "b45b72a48bc87e0b4980",
-    "url": "https://zachjharris.github.io/masters2021/js/app.59e8f153.js"
+    "revision": "b0111d9271d89e86d474",
+    "url": "https://zachjharris.github.io/masters2021/js/app.c6890a01.js"
   },
   {
     "revision": "91980ec9578a22cabb6d",
