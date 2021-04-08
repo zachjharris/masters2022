@@ -98,7 +98,7 @@ export default {
                 {text: 'Golfer 4', value: 'picks[3].name', width: '170'},
                 {text: 'Golfer 5', value: 'picks[4].name', width: '170'},
                 {text: 'Golfer 6', value: 'picks[5].name', width: '170'},
-                {text: 'Total', value: 'topar', align: 'center'},
+                {text: 'Total', value: 'topar', align: 'center', width: '100'},
             ]
         }
     },
