@@ -1,5 +1,5 @@
 <template>
-<v-container>
+<div>
     <!--
     <v-row mx-0>
         <v-spacer />
@@ -74,7 +74,7 @@
     <v-dialog v-if="showPlayer" v-model="showPlayer" max-width="600">
         <player :pars="pars" :player="player" @cancel="showPlayer = false" />
     </v-dialog>
-</v-container>
+</div>
 </template>
 <script>
 import Player from './Player';

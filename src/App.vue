@@ -36,43 +36,43 @@
     </v-app-bar>
 
     <v-main>
-      <v-container>
-        <v-row>
-          <v-col :order="$vuetify.breakpoint.mdAndUp ? 1 : 2" cols="12" :md="playing ? 8 : 12">
-            <v-tabs v-model="tab">
-              <v-tab>Picks</v-tab>
-              <v-tab>Players</v-tab>
-              <!--<v-tab>Leaders</v-tab>-->
-            </v-tabs>
-            
-            <v-tabs-items touchless v-model="tab">
-              <v-tab-item>
-                <player-table :users="users" :pars="pars" />
-              </v-tab-item>
-              <v-tab-item>
-                <pick-table :picks="picks" :pars="pars" v-if="picks.length > 0 && scores.length > 0" />
-              </v-tab-item>
-              <!--
-              <v-tab-item>
-                <v-card>
-                  <v-card-text>
-                    <v-list>
-                      <v-list-item v-for="leader in leaders" :key="`leader-${leader.id}`">
-                        <v-list-item-title>{{ leader.display_name2 }}</v-list-item-title>
-                      </v-list-item>
-                    </v-list>
-                  </v-card-text>
-                </v-card>
-              </v-tab-item>
-              -->
-            </v-tabs-items>
-          </v-col>
-          <v-col cols="12" md="4" v-if="playing" :order="$vuetify.breakpoint.smAndDown ? 1 : 2">
-            <div class="video-container">
-              <div class="video-wrapper">
-                <video id="video" autoplay muted controls="true" style="max-width:100%;width:100%;"></video>
-              </div>
+      <v-row class="mx-0">
+        <v-col :order="$vuetify.breakpoint.mdAndUp ? 1 : 2" cols="12" :md="playing ? 8 : 12">
+          <v-tabs v-model="tab">
+            <v-tab>Picks</v-tab>
+            <v-tab>Players</v-tab>
+            <!--<v-tab>Leaders</v-tab>-->
+          </v-tabs>
+          
+          <v-tabs-items touchless v-model="tab">
+            <v-tab-item>
+              <player-table :users="users" :pars="pars" />
+            </v-tab-item>
+            <v-tab-item>
+              <pick-table :picks="picks" :pars="pars" v-if="picks.length > 0 && scores.length > 0" />
+            </v-tab-item>
+            <!--
+            <v-tab-item>
+              <v-card>
+                <v-card-text>
+                  <v-list>
+                    <v-list-item v-for="leader in leaders" :key="`leader-${leader.id}`">
+                      <v-list-item-title>{{ leader.display_name2 }}</v-list-item-title>
+                    </v-list-item>
+                  </v-list>
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+            -->
+          </v-tabs-items>
+        </v-col>
+        <v-col cols="12" md="4" v-if="playing" :order="$vuetify.breakpoint.smAndDown ? 1 : 2">
+          <div class="video-container">
+            <div class="video-wrapper">
+              <video id="video" autoplay playsinline muted controls="true" style="max-width:100%;width:100%;"></video>
             </div>
+          </div>
+          <div>
             <v-row>
               <v-tabs v-model="selectedVideo" grow>
                 <v-tab value="Featured">Featured</v-tab>
@@ -81,10 +81,10 @@
                 <v-tab value="Holes 15 & 16">Holes 15 & 16</v-tab>
               </v-tabs>
             </v-row>
-          </v-col>
+          </div>
+        </v-col>
 
-        </v-row>
-      </v-container>
+      </v-row>
     </v-main>
     
   </v-app>
@@ -317,7 +317,6 @@ export default {
 </script>
 <style lang="scss">
 .video-container {
-  height:320px;
   /*
   position:relative;
   position:fixed;
@@ -355,8 +354,6 @@ export default {
     #video {
       /*
       */
-      position:absolute;
-      top:0;left:0;right:0;bottom:0;
     }
   }
 }
