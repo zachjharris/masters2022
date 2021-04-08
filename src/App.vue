@@ -38,7 +38,7 @@
     <v-main>
       <v-container>
         <v-row>
-          <v-col :cols="playing ? 8 : 12">
+          <v-col cols="12" :md="playing ? 8 : 12">
           <v-tabs v-model="tab">
             <v-tab>Picks</v-tab>
             <v-tab>Players</v-tab>
@@ -67,7 +67,7 @@
             -->
           </v-tabs-items>
           </v-col>
-          <v-col cols="4" v-if="playing">
+          <v-col cols="12" md="4" v-if="playing">
             <div class="video-container">
               <div class="video-wrapper">
                 <video id="video" autoplay muted controls="true" style="max-width:100%;width:100%;"></video>
