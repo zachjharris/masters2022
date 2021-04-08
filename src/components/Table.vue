@@ -25,22 +25,22 @@
                             <template v-for="(pick, pickIndex) in user.picks">
                                 <td :key="`${user.name}-${index}-${pickIndex}`" @click="viewPlayer(pick)">
                                     <template v-if="pick != null">
-                                        <v-tooltip top :disabled="pick.pos == '' || pick.today == '' || pick.thru == ''">
+                                        <v-tooltip top>
                                             <template v-slot:activator="{ on }">
                                                 <span v-on="on" :class="{'text-decoration-line-through': pick.index> 500 }">
                                                     {{ pick.first_name + ' ' + pick.last_name }}<br />
                                                     <v-chip x-small v-if="pick.pos != '' && pick.topar != ''">{{ pick.pos }}: {{ pick.topar }}</v-chip>
                                                 </span>
                                             </template>
-                                            <div>
+                                            <div v-if="pick.pos != '' && pick.today != '' && pick.thru != ''">
                                                 Position: {{ pick.pos }}<br />
                                                 Today: {{ pick.today }}<br />
                                                 Thru: {{ pick.thru }}
                                             </div>
+                                            <div v-else>
+                                                Tee Time: {{ pick.teetime }}
+                                            </div>
                                         </v-tooltip>
-                                    </template>
-                                    <template v-else>
-                                        Rickie Fowler
                                     </template>
                                 </td>
                             </template>

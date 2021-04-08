@@ -175,7 +175,7 @@ export default {
           if (pick.topar.indexOf('-') > -1) {
             return accumulator - parseInt(pick.topar.replace('-', ''));
           }
-          if (pick.topar == 'E') {
+          if (pick.topar == '' || pick.topar == 'E') {
             return accumulator;
           }
         }, 0);
