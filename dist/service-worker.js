@@ -14,10 +14,10 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "https://zachjharris.github.io/masters2021/precache-manifest.59909a6062ad472a562cf57b455eb50d.js"
+  "https://zachjharris.github.io/masters2021/precache-manifest.86acabb99ebfe78285694eff3264c7b2.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "masters"});
+workbox.core.setCacheNameDetails({prefix: "masters2021"});
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
