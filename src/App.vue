@@ -4,19 +4,23 @@
       app
     >
       <v-tabs show-arrows hide-slider optional>
+        <v-tab disabled style="opacity:1!important;">
+          Leaders
+        </v-tab>
         <template v-for="(leader) in leaders">
-
-          <v-tab :key="leader.id" class="px-3 mx-3">
-              <div class="text-center font-weight-bold">
+          <v-tab :key="leader.id" class="px-3 mx-3" style="color:rgba(0, 0, 0, 0.54)!important;opacity:1!important;" disabled>
+              <div class="text-center font-weight-bold" style="color:rgba(0, 0, 0, 0.54)!important;">
                 {{ leader.display_name2 }}: {{ leader.topar }}
               </div>
           </v-tab>
         </template>
       </v-tabs>
       <v-spacer />
+      <!--
       <v-btn @click="toggleMode" icon>
         <v-icon>{{ isDarkMode ? 'mdi-brightness-4' : 'mdi-brightness-6' }}</v-icon>
       </v-btn>
+      -->
     </v-app-bar>
 
     <v-main>
