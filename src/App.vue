@@ -3,6 +3,8 @@
     <v-app-bar
       app
     >
+    <v-img src="./masters_logo.png" max-width="156" max-height="38" contain />
+    <!--
       <v-tabs show-arrows hide-slider optional>
         <v-tab disabled style="opacity:1!important;">
           Leaders
@@ -15,6 +17,7 @@
           </v-tab>
         </template>
       </v-tabs>
+      -->
       <v-spacer />
       <!--
       <v-btn @click="toggleMode" icon>
@@ -28,6 +31,7 @@
         <v-tabs v-model="tab">
           <v-tab>Picks</v-tab>
           <v-tab>Players</v-tab>
+          <!--<v-tab>Leaders</v-tab>-->
         </v-tabs>
         
         <v-tabs-items touchless v-model="tab">
@@ -37,6 +41,19 @@
           <v-tab-item>
             <pick-table :picks="picks" :pars="pars" v-if="picks.length > 0 && scores.length > 0" />
           </v-tab-item>
+          <!--
+          <v-tab-item>
+            <v-card>
+              <v-card-text>
+                <v-list>
+                  <v-list-item v-for="leader in leaders" :key="`leader-${leader.id}`">
+                    <v-list-item-title>{{ leader.display_name2 }}</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-card-text>
+            </v-card>
+          </v-tab-item>
+          -->
         </v-tabs-items>
       </v-container>
     </v-main>
