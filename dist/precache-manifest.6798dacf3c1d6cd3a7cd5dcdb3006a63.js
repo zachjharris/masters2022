@@ -12,7 +12,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://zachjharris.github.io/masters2021/favicon-32x32.png"
   },
   {
-    "revision": "9dddeec6708117d5b102b32be80ebfff",
+    "revision": "17891c521f8a20ba3727574c1affcc24",
     "url": "https://zachjharris.github.io/masters2021/index.html"
   },
   {

@@ -10,8 +10,8 @@ const config = {
     appleMobileWebAppStatusBarStyle: 'black',
     //workboxPluginMode: 'InjectManifest',
     iconPaths: {
-      favicon32: 'assets/favicon-32x32.png',
-      favicon16: 'assets/favicon-16x16.png'
+      favicon32: 'favicon-32x32.png',
+      favicon16: 'favicon-16x16.png'
     },
     //workboxOptions: {
     //  swSrc: 'dev/sw.js'
