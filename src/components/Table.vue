@@ -90,7 +90,7 @@ export default {
             player: {},
             search: '',
             headers: [
-                {text: 'Name', value: 'name', width:'150'},
+                {text: 'Name', value: 'name', width:'160'},
                 {text: 'Today', value: 'today', align: 'center'},
                 {text: 'Golfer 1', value: 'picks[0].name', width: '170'},
                 {text: 'Golfer 2', value: 'picks[1].name', width: '170'},

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "https://zachjharris.github.io/masters2021/precache-manifest.8f1a5cd637b734a244835578d0f85cc8.js"
+  "https://zachjharris.github.io/masters2021/precache-manifest.30d03c6d849e952f772ea623d8e3b92c.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "masters2021"});

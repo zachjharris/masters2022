@@ -127,6 +127,9 @@ export default {
           if (pick == null) {
             return accumulator;
           }
+          if (pick.total == '') {
+            return accumulator;
+          }
           return accumulator + parseInt(pick.total);
         }, 0);
         
