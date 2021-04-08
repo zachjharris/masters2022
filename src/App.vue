@@ -291,7 +291,9 @@ export default {
       this.retrieveScores();
     }, 60 * 1000);
     await this.$store.dispatch('getVideos');
-    this.selectedVideos = this.liveVideos[0];
+    if (this.liveVideos.length > 0) {
+      this.selectedVideos = this.liveVideos[0];
+    }
     this.playing = false;
     this.selectedVideo = 0;
   },
@@ -309,6 +311,9 @@ export default {
     showVideo() {
       this.$nextTick(() => {
         const video = document.querySelector('#video');
+        if (this.selectedVideos.desktop.length == 0) {
+          return;
+        }
         const src = this.selectedVideos.desktop[0].url;
         console.log(src);
         if (Hls.isSupported()) {

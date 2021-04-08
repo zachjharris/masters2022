@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "92c08c6d79f974f8a920",
+    "revision": "595f6c1aaea54148e27e",
     "url": "https://zachjharris.github.io/masters2021/css/app.f7532203.css"
   },
   {
@@ -20,12 +20,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://zachjharris.github.io/masters2021/img/masters_logo.b10e7411.png"
   },
   {
-    "revision": "c56d88171a529f44700a0a338b4030d3",
+    "revision": "5b79ad7da1f1ce3ff5f4526838397eb5",
     "url": "https://zachjharris.github.io/masters2021/index.html"
   },
   {
-    "revision": "92c08c6d79f974f8a920",
-    "url": "https://zachjharris.github.io/masters2021/js/app.2093e311.js"
+    "revision": "595f6c1aaea54148e27e",
+    "url": "https://zachjharris.github.io/masters2021/js/app.081afa8a.js"
   },
   {
     "revision": "a5930bb242c7b112ab64",
