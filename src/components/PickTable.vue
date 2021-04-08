@@ -14,6 +14,7 @@
                             <td @click="viewPlayer(pick)">
                                 <span :class="{'text-decoration-line-through': pick.index> 500 }">{{ pick.name }}</span>
                             </td>
+                            <td class="text-center">{{ pick.pos }}</td>
                             <td class="text-center">{{ pick.topar }}</td>
                             <td class="text-center">{{ pick.today == '' ? pick.teetime : pick.today }}</td>
                             <td class="text-center">{{ pick.round1Total > 0 ? '+' + pick.round1Total : pick.round1Total == 0 ? 'E' : pick.round1Total }} ({{ (pick.thru != '' && pick.round1.roundStatus == 'Playing') ? 'Thru: ' + pick.thru : pick.round1.roundStatus }})</td>
@@ -54,7 +55,8 @@ export default {
             search: '',
             headers: [
                 {text: 'Name', value: 'name', width:'175'},
-                {text: 'Total', value: 'topar', align: 'center'},
+                {text: 'POS', value: 'pos', align: 'center', width: '100'},
+                {text: 'Total', value: 'topar', align: 'center', width: '100'},
                 {text: 'Today', value: 'today', align: 'center', width: '100'},
                 {text: 'Round 1', value: 'round1Total', align: 'center'},
                 {text: 'Round 2', value: 'round2Total', align: 'center'},
