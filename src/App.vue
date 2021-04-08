@@ -73,6 +73,18 @@
             </div>
           </div>
           <div>
+            <v-item-group v-model="selectedVideos" active-class="selected-video">
+              <v-row>
+                <v-col v-for="video in liveVideos" :key="video.channelId" cols="12" md="4">
+                  <v-item :value="video" v-slot="{toggle}">
+                    <v-img :src="video.imagePath" @click="toggle">
+                      <span class="caption" style="padding:3px;background-color:rgba(0,0,0,.7);color:#ffffff;">{{ video.name }}</span>
+                    </v-img>
+                  </v-item>
+                </v-col>
+              </v-row>
+            </v-item-group>
+            <!--
             <v-row>
               <v-tabs v-model="selectedVideo" grow>
                 <v-tab value="Featured">Featured</v-tab>
@@ -81,6 +93,7 @@
                 <v-tab value="Holes 15 & 16">Holes 15 & 16</v-tab>
               </v-tabs>
             </v-row>
+            -->
           </div>
         </v-col>
 
@@ -124,7 +137,8 @@ export default {
       'Holes 4, 5 & 6',
       'Holes 15 & 16'
     ],
-    selectedVideo: 0
+    selectedVideo: 0,
+    selectedVideos: {}
   }),
   computed: {
     pars() {
@@ -258,16 +272,27 @@ export default {
         });
       }
       return _.orderBy(picks, ['index'], ['asc']);
+    },
+    allVideos() {
+      const videos = JSON.parse(JSON.stringify(this.$store.state.videos));
+      return videos.map((video) => {
+        video.popout = `https://www.masters.com/webview/en_US/live/popout/${video.channelId}`;
+        return video;
+      });
+    },
+    liveVideos() {
+      return this.allVideos.filter((video) => video.live && video.channelId != 'ms' && video.channelId != 'radio');
     }
   },
-  mounted() {
+  async mounted() {
     console.log(this);
-    console.log('Hls', Hls);
     this.retrieveScores();
     setInterval(() => {
       this.retrieveScores();
     }, 60 * 1000);
-    this.showVideo();
+    await this.$store.dispatch('getVideos');
+    this.selectedVideos = this.liveVideos[0];
+    this.playing = false;
     this.selectedVideo = 0;
   },
   beforeDestroy() {
@@ -284,7 +309,7 @@ export default {
     showVideo() {
       this.$nextTick(() => {
         const video = document.querySelector('#video');
-        const src = this.videos[this.videoTabs[this.selectedVideo]];
+        const src = this.selectedVideos.desktop[0].url;
         console.log(src);
         if (Hls.isSupported()) {
           const hls = new Hls();
@@ -293,7 +318,6 @@ export default {
           hls.attachMedia(video);
         }
         else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          console.log(`don't need library`);
           video.src = src;
         }
       });
@@ -311,7 +335,12 @@ export default {
       if (newVal) {
         this.showVideo();
       }
-    }
+    },
+    selectedVideos(newVal, oldVal) {
+      if (!_.isEqual(newVal, oldVal)) {
+        this.showVideo(true);
+      }
+    },
   }
 };
 </script>
@@ -356,5 +385,8 @@ export default {
       */
     }
   }
+}
+.selected-video {
+  border:3px solid #006746;
 }
 </style>

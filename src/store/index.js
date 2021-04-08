@@ -10,7 +10,8 @@ const store = new Vuex.Store({
         {"name":"Eric Spracklen - 2","golfers":["48081","32839","34046","47959","1810","24502"]},{"name":"Jeremy Krystosik","golfers":["30925","46970","33448","28237","34046","25364"]},{"name":"Jeremy Krystosik - 2","golfers":["47959","50525","29725","47483","20396","45526"]},{"name":"Dylan Dancer","golfers":["32839","30925","39971","48081","33448","30925"]},{"name":"Jordan Lane","golfers":["30925","34046","33448","36689","46046","25804"]},{"name":"Alex Harris","golfers":["30925","47959","46970","33448","28237","34046"]}],
         scores: [],
         yardages: [],
-        pars: []
+        pars: [],
+        videos: []
     },
     mutations: {
         setScores(state, scores) {
@@ -21,19 +22,31 @@ const store = new Vuex.Store({
         },
         setYardages(state, yardages) {
             state.yardages = yardages;
+        },
+        setVideos(state, videos) {
+            state.videos = videos;
         }
     },
     actions: {
         async getScores(context) {
             try {
                 const { data } = await axios.get(`https://www.masters.com/en_US/scores/feeds/2021/scores.json`);
-                console.log(data);
                 context.commit('setScores', data.data.player);
                 context.commit('setPars', data.data.pars);
                 context.commit('setYardages', data.data.yardages);
             }
             catch(err) {
                 console.log('unable to retrieve scores');
+            }
+        },
+        async getVideos(context) {
+            try {
+                const { data } = await axios.get(`https://www.masters.com/en_US/cms/feeds/live/liveVideo.json`);
+                const { channels } = data;
+                context.commit('setVideos', channels);
+            }
+            catch(err) {
+                console.log('unable to retrieve videos');
             }
         }
     }
