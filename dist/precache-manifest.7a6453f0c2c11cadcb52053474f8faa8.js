@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "91980ec9578a22cabb6d",
+    "revision": "a0ffccfd3c5ebe10aec8",
     "url": "https://zachjharris.github.io/masters2021/css/chunk-vendors.b48ffef7.css"
   },
   {
@@ -12,16 +12,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://zachjharris.github.io/masters2021/favicon-32x32.png"
   },
   {
-    "revision": "37c3b4322dc972e14f6d208a4967ed8e",
+    "revision": "b10e741139d20b9d2df7956e0d505102",
+    "url": "https://zachjharris.github.io/masters2021/img/masters_logo.b10e7411.png"
+  },
+  {
+    "revision": "d1cb19f9679ec3ba3e0003a63b47c642",
     "url": "https://zachjharris.github.io/masters2021/index.html"
   },
   {
-    "revision": "c0681906766aecc066f1",
-    "url": "https://zachjharris.github.io/masters2021/js/app.8f219b47.js"
+    "revision": "6da5a24faa0c93df64e6",
+    "url": "https://zachjharris.github.io/masters2021/js/app.ba540b65.js"
   },
   {
-    "revision": "91980ec9578a22cabb6d",
-    "url": "https://zachjharris.github.io/masters2021/js/chunk-vendors.b0b0adc9.js"
+    "revision": "a0ffccfd3c5ebe10aec8",
+    "url": "https://zachjharris.github.io/masters2021/js/chunk-vendors.3cf4f285.js"
   },
   {
     "revision": "bfbefa3d51343298a171bb1871ecad86",
@@ -34,5 +38,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "15e0c3315a5e2727d9dd348367825762",
     "url": "https://zachjharris.github.io/masters2021/manifest.json"
+  },
+  {
+    "revision": "b10e741139d20b9d2df7956e0d505102",
+    "url": "https://zachjharris.github.io/masters2021/masters_logo.png"
   }
 ]);
