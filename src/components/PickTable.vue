@@ -21,9 +21,9 @@
                             <td class="text-center">{{ pick.round3Total > 0 ? '+' + pick.round3Total : pick.round3Total == 0 ? 'E' : pick.round3Total }} ({{ (pick.thru != '' && pick.round3.roundStatus == 'Playing') ? 'Thru: ' + pick.thru : pick.round3.roundStatus }})</td>
                             <td class="text-center">{{ pick.round4Total > 0 ? '+' + pick.round4Total : pick.round4Total == 0 ? 'E' : pick.round4Total }} ({{ (pick.thru != '' && pick.round4.roundStatus == 'Playing') ? 'Thru: ' + pick.thru : pick.round4.roundStatus }})</td>
                             <td class="text-left">
-                                <v-tooltip left>
+                                <v-tooltip left :disabled="pick.pickedBy.length == 0">
                                     <template v-slot:activator="{ on }">
-                                        <span v-on="on">{{ pick.pickedBy.length }} {{ pick.pickedBy.length > 1 ? 'people' : 'person' }}</span>
+                                        <span v-on="on">{{ pick.pickedBy.length }} {{ (pick.pickedBy.length > 1 || pick.pickedBy.length == 0) ? 'people' : 'person' }}</span>
                                     </template>
                                     <div style="max-width:250px;">{{ pick.pickedBy.sort().join(', ') }}</div>
                                 </v-tooltip>

@@ -49,7 +49,7 @@
               <player-table :users="users" :pars="pars" />
             </v-tab-item>
             <v-tab-item>
-              <pick-table :picks="picks" :pars="pars" v-if="picks.length > 0 && scores.length > 0" />
+              <pick-table :picks="players" :pars="pars" v-if="picks.length > 0 && scores.length > 0" />
             </v-tab-item>
             <!--
             <v-tab-item>
@@ -250,6 +250,16 @@ export default {
       return scores.filter((score) => {
         return score.pos == 'T1' || score.pos == '1';
       });
+    },
+    players() {
+      const scores = this.scores;
+      const users = this.users;
+      return scores.map((player) => {
+          player.pickedBy = users.filter((user) => {
+            return _.includes(user.golfers, player.id);
+          }).map((user) => user.name);
+          return player;
+      })
     },
     picks() {
       const users = this.users;
