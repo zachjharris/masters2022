@@ -119,17 +119,13 @@ export default {
           });
         });
         user.bestPosition = '';
-        /*
         user.totalStrokes = user.picks.reduce((accumulator, pick) => {
           if (pick == null) {
             return accumulator;
           }
           return accumulator + parseInt(pick.total);
         }, 0);
-        */
-        user.totalStrokes = 0;
-        user.today = 0;
-        /*
+        
         user.today = user.picks.reduce((accumulator, pick) => {
           if (pick == null) {
             return accumulator;
@@ -144,9 +140,7 @@ export default {
             return accumulator;
           }
         }, 0);
-        */
-        user.topar = 0;
-        /*
+        
         user.topar = user.picks.reduce((accumulator, pick) => {
           if (pick == null) {
             return accumulator;
@@ -161,7 +155,6 @@ export default {
             return accumulator;
           }
         }, 0);
-        */
         return user;
       });
     },

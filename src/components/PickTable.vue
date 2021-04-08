@@ -9,15 +9,15 @@
         >
             <template v-slot:body="{ items }">
                 <tbody>
-                    <template v-for="(pick) in items"> 
-                        <tr v-if="pick.name != null" :key="`${pick.id}`">
+                    <template v-for="(pick) in items">
+                        <tr v-if="pick != null && pick.name != null" :key="`${pick.id}`">
                             <td @click="viewPlayer(pick)">
-                                <span :class="{'text-decoration-line-through': pick.index> 50 }">{{ pick.name }}</span>
+                                <span :class="{'text-decoration-line-through': pick.index> 500 }">{{ pick.name }}</span>
                             </td>
                             <td class="text-center">{{ pick.topar }}</td>
                             <td class="text-center">{{ pick.today == '' ? pick.teetime : pick.today }}</td>
-                            <td class="text-center">{{ pick.round1Total > 0 ? '+' + pick.round1Total : pick.round1Total == 0 ? 'E' : pick.round1Total }} ({{ pick.round1.roundStatus }})</td>
-                            <td class="text-center">{{ pick.round2Total > 0 ? '+' + pick.round2Total : pick.round2Total == 0 ? 'E' : pick.round2Total }} ({{ pick.round2.roundStatus }})</td>
+                            <td class="text-center">{{ pick.round1Total > 0 ? '+' + pick.round1Total : pick.round1Total == 0 ? 'E' : pick.round1Total }} ({{ (pick.thru != '' && pick.round1.roundStatus == 'Playing') ? 'Thru: ' + pick.thru : pick.round1.roundStatus }})</td>
+                            <td class="text-center">{{ pick.round2Total > 0 ? '+' + pick.round2Total : pick.round2Total == 0 ? 'E' : pick.round2Total }} ({{ (pick.thru != '' && pick.round2.roundStatus == 'Playing') ? 'Thru: ' + pick.thru : pick.round2.roundStatus }})</td>
                             <td class="text-center">{{ pick.round3Total > 0 ? '+' + pick.round3Total : pick.round3Total == 0 ? 'E' : pick.round3Total }} ({{ (pick.thru != '' && pick.round3.roundStatus == 'Playing') ? 'Thru: ' + pick.thru : pick.round3.roundStatus }})</td>
                             <td class="text-center">{{ pick.round4Total > 0 ? '+' + pick.round4Total : pick.round4Total == 0 ? 'E' : pick.round4Total }} ({{ (pick.thru != '' && pick.round4.roundStatus == 'Playing') ? 'Thru: ' + pick.thru : pick.round4.roundStatus }})</td>
                         </tr>

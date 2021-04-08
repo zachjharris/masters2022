@@ -21,25 +21,30 @@
                     <template v-for="(user, index) in items"> 
                         <tr :key="`${user.name}-${index}`" v-if="user.picks[0] != null">
                             <td>{{ user.name }}</td>
-                            <td class="text-center">{{ user.topar }}</td>
                             <td class="text-center">{{ user.today > 0 ? '+' + user.today : user.today == '0' ? 'E' : user.today }}</td>
-                            <template v-for="pick in user.picks">
-                                <td :key="`${user.name}-${index}-${pick.id}`" @click="viewPlayer(pick)">
-                                    <v-tooltip top :disabled="pick.pos == '' || pick.today == '' || pick.thru == ''">
-                                        <template v-slot:activator="{ on }">
-                                            <span v-on="on" :class="{'text-decoration-line-through': pick.index> 500 }">
-                                                {{ pick.first_name + ' ' + pick.last_name }}<br />
-                                                <v-chip x-small v-if="pick.pos != '' && pick.topar != ''">{{ pick.pos }}: {{ pick.topar }}</v-chip>
-                                            </span>
-                                        </template>
-                                        <div>
-                                            Position: {{ pick.pos }}<br />
-                                            Today: {{ pick.today }}<br />
-                                            Thru: {{ pick.thru }}
-                                        </div>
-                                    </v-tooltip>
+                            <template v-for="(pick, pickIndex) in user.picks">
+                                <td :key="`${user.name}-${index}-${pickIndex}`" @click="viewPlayer(pick)">
+                                    <template v-if="pick != null">
+                                        <v-tooltip top :disabled="pick.pos == '' || pick.today == '' || pick.thru == ''">
+                                            <template v-slot:activator="{ on }">
+                                                <span v-on="on" :class="{'text-decoration-line-through': pick.index> 500 }">
+                                                    {{ pick.first_name + ' ' + pick.last_name }}<br />
+                                                    <v-chip x-small v-if="pick.pos != '' && pick.topar != ''">{{ pick.pos }}: {{ pick.topar }}</v-chip>
+                                                </span>
+                                            </template>
+                                            <div>
+                                                Position: {{ pick.pos }}<br />
+                                                Today: {{ pick.today }}<br />
+                                                Thru: {{ pick.thru }}
+                                            </div>
+                                        </v-tooltip>
+                                    </template>
+                                    <template v-else>
+                                        Rickie Fowler
+                                    </template>
                                 </td>
                             </template>
+                            <td class="text-center">{{ user.topar }}</td>
                         </tr>
                     </template>
                 </tbody>
@@ -86,7 +91,6 @@ export default {
             search: '',
             headers: [
                 {text: 'Name', value: 'name', width:'150'},
-                {text: 'Total', value: 'topar', align: 'center'},
                 {text: 'Today', value: 'today', align: 'center'},
                 {text: 'Golfer 1', value: 'picks[0].name', width: '170'},
                 {text: 'Golfer 2', value: 'picks[1].name', width: '170'},
@@ -94,6 +98,7 @@ export default {
                 {text: 'Golfer 4', value: 'picks[3].name', width: '170'},
                 {text: 'Golfer 5', value: 'picks[4].name', width: '170'},
                 {text: 'Golfer 6', value: 'picks[5].name', width: '170'},
+                {text: 'Total', value: 'topar', align: 'center'},
             ]
         }
     },
