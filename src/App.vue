@@ -38,36 +38,36 @@
     <v-main>
       <v-container>
         <v-row>
-          <v-col cols="12" :md="playing ? 8 : 12">
-          <v-tabs v-model="tab">
-            <v-tab>Picks</v-tab>
-            <v-tab>Players</v-tab>
-            <!--<v-tab>Leaders</v-tab>-->
-          </v-tabs>
-          
-          <v-tabs-items touchless v-model="tab">
-            <v-tab-item>
-              <player-table :users="users" :pars="pars" />
-            </v-tab-item>
-            <v-tab-item>
-              <pick-table :picks="picks" :pars="pars" v-if="picks.length > 0 && scores.length > 0" />
-            </v-tab-item>
-            <!--
-            <v-tab-item>
-              <v-card>
-                <v-card-text>
-                  <v-list>
-                    <v-list-item v-for="leader in leaders" :key="`leader-${leader.id}`">
-                      <v-list-item-title>{{ leader.display_name2 }}</v-list-item-title>
-                    </v-list-item>
-                  </v-list>
-                </v-card-text>
-              </v-card>
-            </v-tab-item>
-            -->
-          </v-tabs-items>
+          <v-col :order="$vuetify.breakpoint.lgAndUp ? 1 : 2" cols="12" :md="playing ? 8 : 12">
+            <v-tabs v-model="tab">
+              <v-tab>Picks</v-tab>
+              <v-tab>Players</v-tab>
+              <!--<v-tab>Leaders</v-tab>-->
+            </v-tabs>
+            
+            <v-tabs-items touchless v-model="tab">
+              <v-tab-item>
+                <player-table :users="users" :pars="pars" />
+              </v-tab-item>
+              <v-tab-item>
+                <pick-table :picks="picks" :pars="pars" v-if="picks.length > 0 && scores.length > 0" />
+              </v-tab-item>
+              <!--
+              <v-tab-item>
+                <v-card>
+                  <v-card-text>
+                    <v-list>
+                      <v-list-item v-for="leader in leaders" :key="`leader-${leader.id}`">
+                        <v-list-item-title>{{ leader.display_name2 }}</v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                  </v-card-text>
+                </v-card>
+              </v-tab-item>
+              -->
+            </v-tabs-items>
           </v-col>
-          <v-col cols="12" md="4" v-if="playing">
+          <v-col cols="12" md="4" v-if="playing" :order="$vuetify.breakpoint.mdAndDown ? 1 : 2">
             <div class="video-container">
               <div class="video-wrapper">
                 <video id="video" autoplay muted controls="true" style="max-width:100%;width:100%;"></video>
