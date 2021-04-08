@@ -20,6 +20,14 @@
                             <td class="text-center">{{ pick.round2Total > 0 ? '+' + pick.round2Total : pick.round2Total == 0 ? 'E' : pick.round2Total }} ({{ (pick.thru != '' && pick.round2.roundStatus == 'Playing') ? 'Thru: ' + pick.thru : pick.round2.roundStatus }})</td>
                             <td class="text-center">{{ pick.round3Total > 0 ? '+' + pick.round3Total : pick.round3Total == 0 ? 'E' : pick.round3Total }} ({{ (pick.thru != '' && pick.round3.roundStatus == 'Playing') ? 'Thru: ' + pick.thru : pick.round3.roundStatus }})</td>
                             <td class="text-center">{{ pick.round4Total > 0 ? '+' + pick.round4Total : pick.round4Total == 0 ? 'E' : pick.round4Total }} ({{ (pick.thru != '' && pick.round4.roundStatus == 'Playing') ? 'Thru: ' + pick.thru : pick.round4.roundStatus }})</td>
+                            <td class="text-left">
+                                <v-tooltip left>
+                                    <template v-slot:activator="{ on }">
+                                        <span v-on="on">{{ pick.pickedBy.length }} {{ pick.pickedBy.length > 1 ? 'people' : 'person' }}</span>
+                                    </template>
+                                    <div style="max-width:250px;">{{ pick.pickedBy.sort().join(', ') }}</div>
+                                </v-tooltip>
+                            </td>
                         </tr>
                     </template>
                 </tbody>
@@ -51,9 +59,13 @@ export default {
                 {text: 'Round 1', value: 'round1Total', align: 'center'},
                 {text: 'Round 2', value: 'round2Total', align: 'center'},
                 {text: 'Round 3', value: 'round3Total', align: 'center'},
-                {text: 'Round 4', value: 'round4Total', align: 'center'}
+                {text: 'Round 4', value: 'round4Total', align: 'center'},
+                {text: 'Picked By', value: 'pickedBy', align: 'left'}
             ]
         }
+    },
+    mounted() {
+        console.log('PickTable', this);
     },
     methods: {
         viewPlayer(player) {

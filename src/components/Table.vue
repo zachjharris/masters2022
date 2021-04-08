@@ -21,9 +21,10 @@
                     <template v-for="(user, index) in items"> 
                         <tr :key="`${user.name}-${index}`" v-if="user.picks[0] != null">
                             <td>{{ user.name }}</td>
+                            <td class="text-center">{{ user.topar }}</td>
                             <td class="text-center">{{ user.today > 0 ? '+' + user.today : user.today == '0' ? 'E' : user.today }}</td>
                             <template v-for="(pick, pickIndex) in user.picks">
-                                <td :key="`${user.name}-${index}-${pickIndex}`" @click="viewPlayer(pick)">
+                                <td :key="`${user.name}-${index}-${pickIndex}`" @mouseup="viewPlayer(pick)">
                                     <template v-if="pick != null">
                                         <v-tooltip top>
                                             <template v-slot:activator="{ on }">
@@ -44,7 +45,6 @@
                                     </template>
                                 </td>
                             </template>
-                            <td class="text-center">{{ user.topar }}</td>
                         </tr>
                     </template>
                 </tbody>
@@ -91,6 +91,7 @@ export default {
             search: '',
             headers: [
                 {text: 'Name', value: 'name', width:'160'},
+                {text: 'Total', value: 'topar', align: 'center', width: '100'},
                 {text: 'Today', value: 'today', align: 'center', width:'100'},
                 {text: 'Golfer 1', value: 'picks[0].name', width: '170'},
                 {text: 'Golfer 2', value: 'picks[1].name', width: '170'},
@@ -98,14 +99,33 @@ export default {
                 {text: 'Golfer 4', value: 'picks[3].name', width: '170'},
                 {text: 'Golfer 5', value: 'picks[4].name', width: '170'},
                 {text: 'Golfer 6', value: 'picks[5].name', width: '170'},
-                {text: 'Total', value: 'topar', align: 'center', width: '100'},
-            ]
+            ],
+            touch: false,
+            clicks: 0,
+            clickTimeout: null,
+            count: 0
         }
+    },
+    beforeMount() {
+        this.touch = matchMedia('(hover:none),(pointer:coarse)').matches;
     },
     methods: {
         viewPlayer(player) {
+            //if (this.touch) {
+                if (this.count < 1) {
+                    this.count++;
+                    this.clickTimeout = setTimeout(() => {
+                        this.count = 0;
+                    }, 1000);
+                    return;
+                }
+                if (this.clickTimeout != null) {
+                    clearTimeout(this.clickTimeout);
+                }
+            //}
             this.player = player;
             this.showPlayer = true;
+            this.count = 0;
         }
     }
 }

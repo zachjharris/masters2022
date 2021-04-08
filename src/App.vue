@@ -24,6 +24,11 @@
         <v-icon>{{ isDarkMode ? 'mdi-brightness-4' : 'mdi-brightness-6' }}</v-icon>
       </v-btn>
       -->
+      <!--
+      <v-btn @click="showVideo" icon>
+        <v-icon>mdi-video</v-icon>
+      </v-btn>
+      -->
     </v-app-bar>
 
     <v-main>
@@ -57,6 +62,9 @@
         </v-tabs-items>
       </v-container>
     </v-main>
+    <!--
+    <video id="video" v-if="playing" style="position:fixed;bottom:0;right:0;height:300px;width:300px;"></video>
+    -->
   </v-app>
 </template>
 
@@ -64,6 +72,8 @@
 import PlayerTable from './components/Table';
 import PickTable from './components/PickTable';
 import _ from 'lodash';
+//import Hls from './plugins/hls';
+import Hls from 'hls.js';
 export default {
   name: 'App',
   components: {
@@ -76,6 +86,8 @@ export default {
     tab: 0,
     player: {},
     isDarkMode: false,
+    video: null,
+    playing: false,
   }),
   computed: {
     pars() {
@@ -190,19 +202,38 @@ export default {
     },
     picks() {
       const users = this.users;
-      const picks = [];
+      let picks = [];
       users.forEach((user) => {
-        picks.push(...user.picks);
+        if (user.picks[0] != null) {
+          picks.push(...user.picks);
+        }
       });
-      return _.orderBy(_.uniqBy(picks, 'id'), ['index'], ['asc']);
+      console.log('all picks', picks);
+      picks = _.uniqBy(picks, 'id');
+      console.log(picks);
+      if (picks.length > 0) {
+        picks = picks.map((pick) => {
+          //pick.pickedBy = [];
+          pick.pickedBy = users.filter((user) => {
+            return _.includes(user.golfers, pick.id);
+          }).map((user) => user.name);
+          return pick;
+        });
+      }
+      return _.orderBy(picks, ['index'], ['asc']);
     }
   },
   mounted() {
     console.log(this);
+    console.log('Hls', Hls);
     this.retrieveScores();
     setInterval(() => {
       this.retrieveScores();
     }, 60 * 1000);
+    //this.showVideo();
+  },
+  beforeDestroy() {
+    this.playing = false;
   },
   methods: {
     retrieveScores() {
@@ -211,6 +242,21 @@ export default {
     toggleMode() {
       this.isDarkMode = !this.isDarkMode;
       this.$vuetify.theme.dark = this.isDarkMode;
+    },
+    showVideo() {
+      this.playing = true;
+      this.$nextTick(() => {
+        const video = document.querySelector('#video');
+        const videoSrc = `https://ibm1-live-hls.secure.footprint.net/egress/chandler/ibmmasters/live1/fg/master_600.m3u8`;
+        if (Hls.isSupported()) {
+          const hls = new Hls();
+          hls.loadSource(videoSrc);
+          hls.attachMedia(video);
+        }
+        else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          video.src = videoSrc;
+        }
+      });
     }
   }
 };
