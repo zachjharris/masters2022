@@ -91,7 +91,7 @@ export default {
             search: '',
             headers: [
                 {text: 'Name', value: 'name', width:'160'},
-                {text: 'Today', value: 'today', align: 'center'},
+                {text: 'Today', value: 'today', align: 'center', width:'100'},
                 {text: 'Golfer 1', value: 'picks[0].name', width: '170'},
                 {text: 'Golfer 2', value: 'picks[1].name', width: '170'},
                 {text: 'Golfer 3', value: 'picks[2].name', width: '170'},
