@@ -38,7 +38,7 @@
     <v-main>
       <v-container>
         <v-row>
-          <v-col :order="$vuetify.breakpoint.lgAndUp ? 1 : 2" cols="12" :md="playing ? 8 : 12">
+          <v-col :order="$vuetify.breakpoint.mdAndUp ? 1 : 2" cols="12" :md="playing ? 8 : 12">
             <v-tabs v-model="tab">
               <v-tab>Picks</v-tab>
               <v-tab>Players</v-tab>
@@ -67,7 +67,7 @@
               -->
             </v-tabs-items>
           </v-col>
-          <v-col cols="12" md="4" v-if="playing" :order="$vuetify.breakpoint.mdAndDown ? 1 : 2">
+          <v-col cols="12" md="4" v-if="playing" :order="$vuetify.breakpoint.smAndDown ? 1 : 2">
             <div class="video-container">
               <div class="video-wrapper">
                 <video id="video" autoplay muted controls="true" style="max-width:100%;width:100%;"></video>
