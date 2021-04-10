@@ -11,7 +11,8 @@ const config = {
     //workboxPluginMode: 'InjectManifest',
     iconPaths: {
       favicon32: 'favicon-32x32.png',
-      favicon16: 'favicon-16x16.png'
+      favicon16: 'favicon-16x16.png',
+      appleTouchIcon: 'apple-touch-icon-152x152.jpg'
     },
     //workboxOptions: {
     //  swSrc: 'dev/sw.js'
