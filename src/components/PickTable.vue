@@ -1,5 +1,5 @@
 <template>
-<v-container>
+<div>
     <v-card class="mt-2">
         <v-data-table :items="picks" :headers="headers" 
             hide-default-footer 
@@ -12,7 +12,7 @@
                     <template v-for="(pick) in items">
                         <tr v-if="pick != null && pick.name != null" :key="`${pick.id}`">
                             <td @click="viewPlayer(pick)">
-                                <span :class="{'text-decoration-line-through': pick.index> 500 }">{{ pick.name }}</span>
+                                <span :class="{'text-decoration-line-through': pick.index> 50 }">{{ pick.name }}</span>
                             </td>
                             <td class="text-center">{{ pick.pos }}</td>
                             <td class="text-center">{{ pick.topar }}</td>
@@ -38,7 +38,7 @@
     <v-dialog v-if="showPlayer" v-model="showPlayer" max-width="600">
         <player :pars="pars" :player="player" @cancel="showPlayer = false" />
     </v-dialog>
-</v-container>
+    </div>
 </template>
 <script>
 import Player from './Player';
@@ -54,15 +54,15 @@ export default {
             player: {},
             search: '',
             headers: [
-                {text: 'Name', value: 'name', width:'175'},
-                {text: 'POS', value: 'pos', align: 'center', width: '100'},
-                {text: 'Total', value: 'topar', align: 'center', width: '100'},
-                {text: 'Today', value: 'today', align: 'center', width: '100'},
-                {text: 'Round 1', value: 'round1Total', align: 'center'},
-                {text: 'Round 2', value: 'round2Total', align: 'center'},
-                {text: 'Round 3', value: 'round3Total', align: 'center'},
-                {text: 'Round 4', value: 'round4Total', align: 'center'},
-                {text: 'Picked By', value: 'pickedBy', align: 'left'}
+                {text: 'Name', value: 'name', width: '200'},
+                {text: 'POS', value: 'pos', align: 'center', width: '150'},
+                {text: 'Total', value: 'topar', align: 'center', width: '150'},
+                {text: 'Today', value: 'today', align: 'center', width: '150'},
+                {text: 'Round 1', value: 'round1Total', align: 'center', width:'150'},
+                {text: 'Round 2', value: 'round2Total', align: 'center', width:'150'},
+                {text: 'Round 3', value: 'round3Total', align: 'center', width:'150'},
+                {text: 'Round 4', value: 'round4Total', align: 'center', width:'150'},
+                {text: 'Picked By', value: 'pickedBy', align: 'left', width:'150'}
             ]
         }
     },

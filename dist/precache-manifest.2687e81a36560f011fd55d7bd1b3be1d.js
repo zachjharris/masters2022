@@ -4,11 +4,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://zachjharris.github.io/masters2021/apple-touch-icon-152x152.jpg"
   },
   {
-    "revision": "822750cbdf7b262c502f",
+    "revision": "0e13a097d0fa525424ef",
     "url": "https://zachjharris.github.io/masters2021/css/app.f7532203.css"
   },
   {
-    "revision": "aa841d12f1581acce442",
+    "revision": "20046d1d74a88670d29b",
     "url": "https://zachjharris.github.io/masters2021/css/chunk-vendors.b48ffef7.css"
   },
   {
@@ -24,16 +24,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://zachjharris.github.io/masters2021/img/masters_logo.b10e7411.png"
   },
   {
-    "revision": "9e7c9bd6cccebd80ab925e1deea3501d",
+    "revision": "6fc118c6bfb2c2da09b66c502d9ba212",
     "url": "https://zachjharris.github.io/masters2021/index.html"
   },
   {
-    "revision": "822750cbdf7b262c502f",
-    "url": "https://zachjharris.github.io/masters2021/js/app.ca6fb096.js"
+    "revision": "0e13a097d0fa525424ef",
+    "url": "https://zachjharris.github.io/masters2021/js/app.a19a28a0.js"
   },
   {
-    "revision": "aa841d12f1581acce442",
-    "url": "https://zachjharris.github.io/masters2021/js/chunk-vendors.7c1084c2.js"
+    "revision": "20046d1d74a88670d29b",
+    "url": "https://zachjharris.github.io/masters2021/js/chunk-vendors.d9e73895.js"
   },
   {
     "revision": "bfbefa3d51343298a171bb1871ecad86",

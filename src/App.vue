@@ -44,7 +44,7 @@
             <!--<v-tab>Leaders</v-tab>-->
           </v-tabs>
           <v-row class="mx-0">
-          <v-tabs-items touchless v-model="tab">
+          <v-tabs-items touchless v-model="tab" style="width:100%;">
             <v-tab-item>
               <player-table :users="users" :pars="pars" />
             </v-tab-item>
@@ -64,7 +64,7 @@
           </div>
           <div>
             <v-item-group v-model="selectedVideos" active-class="selected-video">
-              <v-row>
+              <v-row wrap>
                 <v-col v-for="video in liveVideos" :key="video.channelId" cols="4" sm="3" md="3">
                   <v-item :value="video" v-slot="{toggle}">
                     <v-img :src="video.imagePath" @click="toggle">
