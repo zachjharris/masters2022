@@ -64,8 +64,8 @@
           </div>
           <div>
             <v-item-group v-model="selectedVideos" active-class="selected-video">
-              <v-row wrap>
-                <v-col v-for="video in liveVideos" :key="video.channelId" cols="4" sm="3" md="3">
+              <v-row>
+                <v-col v-for="video in liveVideos" :key="video.channelId" cols="6" xs="6" sm="4" md="2" lg="2">
                   <v-item :value="video" v-slot="{toggle}">
                     <v-img :src="video.imagePath" @click="toggle">
                       <span class="caption" style="padding:3px;background-color:rgba(0,0,0,.7);color:#ffffff;">{{ video.name }}</span>
