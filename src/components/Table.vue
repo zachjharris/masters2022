@@ -28,7 +28,7 @@
                                     <template v-if="pick != null">
                                         <v-tooltip top>
                                             <template v-slot:activator="{ on }">
-                                                <span v-on="on" :class="{'text-decoration-line-through': pick.index> 50 }">
+                                                <span v-on="on" :class="{'text-decoration-line-through': pick.lastHoleWithShot == '2|18' }">
                                                     {{ pick.first_name + ' ' + pick.last_name }}<br />
                                                     <v-chip x-small v-if="pick.pos != '' && pick.topar != ''">{{ pick.pos }}: {{ pick.topar }}</v-chip>
                                                 </span>

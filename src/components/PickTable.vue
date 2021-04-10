@@ -12,7 +12,7 @@
                     <template v-for="(pick) in items">
                         <tr v-if="pick != null && pick.name != null" :key="`${pick.id}`">
                             <td @click="viewPlayer(pick)">
-                                <span :class="{'text-decoration-line-through': pick.index> 50 }">{{ pick.name }}</span>
+                                <span :class="{'text-decoration-line-through': pick.lastHoleWithShot == '2|18' }">{{ pick.name }}</span>
                             </td>
                             <td class="text-center">{{ pick.pos }}</td>
                             <td class="text-center">{{ pick.topar }}</td>
