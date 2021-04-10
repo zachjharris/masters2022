@@ -37,13 +37,13 @@
 
     <v-main>
       <v-row class="mx-0">
-        <v-col :order="$vuetify.breakpoint.mdAndUp ? 1 : 2" cols="12" :md="playing ? 8 : 12">
+        <v-col :order="$vuetify.breakpoint.mdAndUp ? 1 : 2" cols="12" :md="playing ? 6 : 12">
           <v-tabs v-model="tab">
             <v-tab>Picks</v-tab>
             <v-tab>Players</v-tab>
             <!--<v-tab>Leaders</v-tab>-->
           </v-tabs>
-          
+          <v-row class="mx-0">
           <v-tabs-items touchless v-model="tab">
             <v-tab-item>
               <player-table :users="users" :pars="pars" />
@@ -51,22 +51,12 @@
             <v-tab-item>
               <pick-table :picks="players" :pars="pars" v-if="picks.length > 0 && scores.length > 0" />
             </v-tab-item>
-            <!--
-            <v-tab-item>
-              <v-card>
-                <v-card-text>
-                  <v-list>
-                    <v-list-item v-for="leader in leaders" :key="`leader-${leader.id}`">
-                      <v-list-item-title>{{ leader.display_name2 }}</v-list-item-title>
-                    </v-list-item>
-                  </v-list>
-                </v-card-text>
-              </v-card>
-            </v-tab-item>
-            -->
           </v-tabs-items>
+          </v-row>
         </v-col>
-        <v-col cols="12" md="4" v-if="playing" :order="$vuetify.breakpoint.smAndDown ? 1 : 2">
+        <v-col cols="12" md="6" v-if="playing" :order="$vuetify.breakpoint.smAndDown ? 1 : 2">
+          <v-row class="mx-0">
+          <v-divider v-if="playing" vertical />
           <div class="video-container">
             <div class="video-wrapper">
               <video id="video" autoplay playsinline muted controls="true" style="max-width:100%;width:100%;"></video>
@@ -75,7 +65,7 @@
           <div>
             <v-item-group v-model="selectedVideos" active-class="selected-video">
               <v-row>
-                <v-col v-for="video in liveVideos" :key="video.channelId" cols="12" md="4">
+                <v-col v-for="video in liveVideos" :key="video.channelId" cols="4" sm="3" md="3">
                   <v-item :value="video" v-slot="{toggle}">
                     <v-img :src="video.imagePath" @click="toggle">
                       <span class="caption" style="padding:3px;background-color:rgba(0,0,0,.7);color:#ffffff;">{{ video.name }}</span>
@@ -95,6 +85,7 @@
             </v-row>
             -->
           </div>
+          </v-row>
         </v-col>
 
       </v-row>
