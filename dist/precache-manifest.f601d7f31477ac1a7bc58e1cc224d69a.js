@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://zachjharris.github.io/masters2021/apple-touch-icon-152x152.jpg"
   },
   {
-    "revision": "9ebe689afa0a9e0e3798",
+    "revision": "8a55de36d801e59e4616",
     "url": "https://zachjharris.github.io/masters2021/css/app.f7532203.css"
   },
   {
@@ -24,12 +24,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://zachjharris.github.io/masters2021/img/masters_logo.b10e7411.png"
   },
   {
-    "revision": "7c04119787c9bf30b8b94deed25ca5fb",
+    "revision": "e23eaaec2e4c365eedf192f2410fb2a4",
     "url": "https://zachjharris.github.io/masters2021/index.html"
   },
   {
-    "revision": "9ebe689afa0a9e0e3798",
-    "url": "https://zachjharris.github.io/masters2021/js/app.6e2e50a7.js"
+    "revision": "8a55de36d801e59e4616",
+    "url": "https://zachjharris.github.io/masters2021/js/app.ea6ea147.js"
   },
   {
     "revision": "20046d1d74a88670d29b",
