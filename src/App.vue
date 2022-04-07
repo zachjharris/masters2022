@@ -26,18 +26,46 @@
       -->
       <v-tooltip left>
         <template v-slot:activator="{ on }">
-          <v-btn v-on="on" @click="playing = !playing" icon>
-            <v-icon>{{ playing ? 'mdi-video' : 'mdi-video-off' }}</v-icon>
-          </v-btn>
+          <div v-on="on">
+            <v-btn @click="playing = !playing" icon>
+              <v-icon>{{ playing ? 'mdi-video' : 'mdi-video-off' }}</v-icon>
+            </v-btn>
+          </div>
         </template>
-        <span>Toggle Video</span>
+        <span>{{ videos.length > 0 ? 'Toggle Video' : 'No live videos' }}</span>
       </v-tooltip>
       
     </v-app-bar>
 
     <v-main>
       <v-row class="mx-0">
-        <v-col :order="$vuetify.breakpoint.mdAndUp ? 1 : 2" cols="12" :md="playing ? 6 : 12">
+        <v-col cols="12" v-if="playing">
+          <v-row class="mx-0" justify="center">
+            <v-col cols="12" lg="7">
+              <div class="video-container">
+                <div class="video-wrapper">
+                  <video id="video" autoplay playsinline muted controls="true" style="max-width:100%;width:100%;"></video>
+                </div>
+              </div>
+            </v-col>
+            <v-col cols="12" lg="3">
+              <div>
+                <v-item-group v-model="selectedVideos" active-class="selected-video">
+                  <v-row>
+                    <v-col v-for="video in liveVideos" :key="video.channelId" cols="6" xs="6" sm="4" md="2" lg="2" style="max-width:200px;">
+                      <v-item :value="video" v-slot="{toggle}" :disabled="!video.live">
+                        <v-img :src="video.imagePath" @click="toggle">
+                          <span class="caption" style="padding:3px;background-color:rgba(0,0,0,.7);color:#ffffff;">{{ video.name }}</span>
+                        </v-img>
+                      </v-item>
+                    </v-col>
+                  </v-row>
+                </v-item-group>
+              </div>
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col cols="12">
           <v-tabs v-model="tab">
             <v-tab>Picks</v-tab>
             <v-tab>Players</v-tab>
@@ -52,39 +80,6 @@
               <pick-table :picks="players" :pars="pars" v-if="picks.length > 0 && scores.length > 0" />
             </v-tab-item>
           </v-tabs-items>
-          </v-row>
-        </v-col>
-        <v-col cols="12" md="6" v-if="playing" :order="$vuetify.breakpoint.smAndDown ? 1 : 2">
-          <v-row class="mx-0">
-          <v-divider v-if="playing" vertical />
-          <div class="video-container">
-            <div class="video-wrapper">
-              <video id="video" autoplay playsinline muted controls="true" style="max-width:100%;width:100%;"></video>
-            </div>
-          </div>
-          <div>
-            <v-item-group v-model="selectedVideos" active-class="selected-video">
-              <v-row>
-                <v-col v-for="video in liveVideos" :key="video.channelId" cols="6" xs="6" sm="4" md="2" lg="2" style="max-width:200px;">
-                  <v-item :value="video" v-slot="{toggle}">
-                    <v-img :src="video.imagePath" @click="toggle">
-                      <span class="caption" style="padding:3px;background-color:rgba(0,0,0,.7);color:#ffffff;">{{ video.name }}</span>
-                    </v-img>
-                  </v-item>
-                </v-col>
-              </v-row>
-            </v-item-group>
-            <!--
-            <v-row>
-              <v-tabs v-model="selectedVideo" grow>
-                <v-tab value="Featured">Featured</v-tab>
-                <v-tab value="Amen Corner">Amen Corner</v-tab>
-                <v-tab value="Holes 4, 5 & 6">Holes 4, 5 & 6</v-tab>
-                <v-tab value="Holes 15 & 16">Holes 15 & 16</v-tab>
-              </v-tabs>
-            </v-row>
-            -->
-          </div>
           </v-row>
         </v-col>
 
@@ -282,7 +277,7 @@ export default {
       });
     },
     liveVideos() {
-      return this.allVideos.filter((video) => video.live && video.channelId != 'ms' && video.channelId != 'radio');
+      return _.orderBy(this.allVideos.filter((video) => video.channelId != 'ms' && video.channelId != 'radio'), ['name', 'live'], ['asc', 'asc']);
     }
   },
   async mounted() {
