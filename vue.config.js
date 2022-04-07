@@ -20,6 +20,6 @@ const config = {
   }
 }
 if (process.env.NODE_ENV == 'production') {
-  config.publicPath = "https://zachjharris.github.io/masters2021/";
+  config.publicPath = "https://zachjharris.github.io/masters-snake/";
 }
 module.exports = config;
