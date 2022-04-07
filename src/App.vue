@@ -28,7 +28,7 @@
         <template v-slot:activator="{ on }">
           <div v-on="on">
             <v-btn @click="playing = !playing" icon>
-              <v-icon>{{ playing ? 'mdi-tv-classic' : 'mdi-tv-classic-off' }}</v-icon>
+              <v-icon>{{ playing ? 'mdi-television-classic' : 'mdi-television-classic-off' }}</v-icon>
             </v-btn>
           </div>
         </template>
