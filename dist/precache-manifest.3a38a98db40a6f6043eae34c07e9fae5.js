@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://zachjharris.github.io/masters-snake/apple-touch-icon-152x152.jpg"
   },
   {
-    "revision": "b8fdfb45d2efc43d97d4",
+    "revision": "aa3f92ce2b53dcef079e",
     "url": "https://zachjharris.github.io/masters-snake/css/app.f7532203.css"
   },
   {
@@ -24,12 +24,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://zachjharris.github.io/masters-snake/img/masters_logo.b10e7411.png"
   },
   {
-    "revision": "5029f50c54557b2981dd1996e6fcc9c5",
+    "revision": "88b1adccd110b3051d09b551d48e95af",
     "url": "https://zachjharris.github.io/masters-snake/index.html"
   },
   {
-    "revision": "b8fdfb45d2efc43d97d4",
-    "url": "https://zachjharris.github.io/masters-snake/js/app.c85725ee.js"
+    "revision": "aa3f92ce2b53dcef079e",
+    "url": "https://zachjharris.github.io/masters-snake/js/app.bdfadc53.js"
   },
   {
     "revision": "38c4c3967128ba18fff3",
