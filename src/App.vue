@@ -28,11 +28,11 @@
         <template v-slot:activator="{ on }">
           <div v-on="on">
             <v-btn @click="playing = !playing" icon>
-              <v-icon>{{ playing ? 'mdi-video' : 'mdi-video-off' }}</v-icon>
+              <v-icon>{{ playing ? 'mdi-tv-classic' : 'mdi-tv-classic-off' }}</v-icon>
             </v-btn>
           </div>
         </template>
-        <span>{{ videos.length > 0 ? 'Toggle Video' : 'No live videos' }}</span>
+        <span>Stream</span>
       </v-tooltip>
       
     </v-app-bar>
@@ -48,7 +48,7 @@
                 </div>
               </div>
             </v-col>
-            <v-col cols="12" lg="3">
+            <v-col cols="12" lg="5">
               <div>
                 <v-item-group v-model="selectedVideos" active-class="selected-video">
                   <v-row>
