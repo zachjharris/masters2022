@@ -3,7 +3,7 @@ const config = {
     "vuetify"
   ],
   pwa: {
-    name: 'Masters 2021',
+    name: 'Masters 2022',
     themeColor: '#006746',
     msTileColor: '#000000',
     appleMobileWebAppCapable: 'yes',
@@ -20,6 +20,6 @@ const config = {
   }
 }
 if (process.env.NODE_ENV == 'production') {
-  config.publicPath = "https://zachjharris.github.io/masters-snake/";
+  config.publicPath = "https://zachjharris.github.io/masters2022/";
 }
 module.exports = config;

@@ -5,15 +5,21 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         users: [
-            { "name": "John Rich", "golfers": ["46970", "26329"] },
-            { "name": "Josh Anderson", "golfers": ["35891", "32839"] },
-            { "name": "Zach Domer", "golfers": ["46046", "47483"] },
-            { "name": "Austin Korte", "golfers": ["36689", "8793"] },
-            { "name": "Zach Besand", "golfers": ["35450", "34363"] },
-            { "name": "Nolan Escher", "golfers": ["30925", "47959"] },
-            { "name": "Zach Harris", "golfers": ["50525", "48081"] },
-            { "name": "Kevin Kinsella", "golfers": ["47504", "46717"] },
-            { "name": "Dylan Dancer", "golfers": ["33448", "34046"] }
+            { "name": "Zach Harris", "golfers": ["46970", "50525", "28237", "30925", "33448", "45526"] },
+            { "name": "Matt Barker", "golfers": ["50525", "30925", "35891", "29725", "46046", "32839"] },
+            { "name": "Kevin K", "golfers": ["35891", "46970", "47504", "34046", "30925", "25804"] },
+            { "name": "Will", "golfers": ["32839", "47483", "30911", "46970", "33448", "46717"] },
+            { "name": "Mike Siefker", "golfers": ["48081", "32839", "34046", "35450", "26329", "46046"] },
+            { "name": "Nik sekoulopoulos", "golfers": ["35891", "46970", "36689", "47483", "52215", "50525"] },
+            { "name": "Zach Domer", "golfers": ["46046", "36689", "33448", "46717", "46970", "47483"] },
+            { "name": "Paul Harris", "golfers": ["46970", "35450", "35891", "33448", "34363", "47483"] },
+            { "name": "Noller", "golfers": ["33448", "48081", "36689", "50525", "35891", "46970"] },
+            { "name": "Casey", "golfers": ["46970", "28237", "30911", "35450", "36689", "34046"] },
+            { "name": "Leininger", "golfers": ["34046", "25396", "32839", "46970", "33448", "30925"] },
+            { "name": "Michael Rinehart", "golfers": ["46970", "30925", "36689", "50525", "33448", "8793"] },
+            { "name": "Eric", "golfers": ["48081", "36689", "8793", "24502", "39997", "25396"] },
+            { "name": "Graham", "golfers": ["26329", "50525", "46717", "46970", "28237", "33204"] },
+            { "name": "Alex", "golfers": ["46970", "34046", "48081", "35891", "36689", "46046"] }
         ],
         scores: [],
         yardages: [],

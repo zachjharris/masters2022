@@ -21,14 +21,8 @@
                     <template v-for="(user, index) in items"> 
                         <tr :key="`${user.name}-${index}`" v-if="user.picks[0] != null">
                             <td>{{ user.name }}</td>
-                            <td class="text-center">
-                                <span v-if="user.bestPosition != ''">
-                                    {{ user.bestPosition }}
-                                </span>
-                                <v-icon v-else>
-                                    mdi-minus
-                                </v-icon>
-                            </td>
+                            <td class="text-center">{{ user.topar }}</td>
+                            <td class="text-center">{{ user.today > 0 ? '+' + user.today : user.today == '0' ? 'E' : user.today }}</td>
                             <template v-for="(pick, pickIndex) in user.picks">
                                 <td :key="`${user.name}-${index}-${pickIndex}`" @mouseup="viewPlayer(pick)">
                                     <template v-if="pick != null">
@@ -97,13 +91,14 @@ export default {
             search: '',
             headers: [
                 {text: 'Name', value: 'name', width:'160'},
-                {text: 'Best Pos', value: 'bestPosition', align: 'center', width: '100'},
+                {text: 'Total', value: 'topar', align: 'center', width: '100'},
+                {text: 'Today', value: 'today', align: 'center', width:'100'},
                 {text: 'Golfer 1', value: 'picks[0].name', width: '170'},
                 {text: 'Golfer 2', value: 'picks[1].name', width: '170'},
-                //{text: 'Golfer 3', value: 'picks[2].name', width: '170'},
-                //{text: 'Golfer 4', value: 'picks[3].name', width: '170'},
-                //{text: 'Golfer 5', value: 'picks[4].name', width: '170'},
-                //{text: 'Golfer 6', value: 'picks[5].name', width: '170'},
+                {text: 'Golfer 3', value: 'picks[2].name', width: '170'},
+                {text: 'Golfer 4', value: 'picks[3].name', width: '170'},
+                {text: 'Golfer 5', value: 'picks[4].name', width: '170'},
+                {text: 'Golfer 6', value: 'picks[5].name', width: '170'},
             ],
             touch: false,
             clicks: 0,
